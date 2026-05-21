@@ -1,0 +1,90 @@
+{
+  "name": "Workflow Automation Advisor",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "88f561a3-50d9-4380-a635-db2619779ace",
+      "name": "When chat message received",
+      "webhookId": "585cfbf2-f927-4d64-83b3-5fbdb406ec12"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a friendly assistant helping someone learn n8n and AI automation. Keep replies short (2-3 sentences max) and encouraging. If they ask a technical question, give a clear answer without jargon."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "c1a4b34c-ced0-42b7-8e9c-ec16c00e6a6a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "ac2e85ac-a393-4ada-9a62-147c89358f2a",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "xdSpRTVVg86EE2Gx",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "bd5ab847-8c02-4a0e-a6e7-2d5cfdc84911",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7b5277de91062254413f0478a09590281061b37a76682e7cbe36954d2939cf68"
+  },
+  "id": "mmRTRBHVgQ8Q84fb",
+  "tags": []
+}
